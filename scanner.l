@@ -63,8 +63,8 @@ PREDEF_FUNC   (printf|scanf|gets|puts|strlen|strcpy|strncpy|strcat|strncat|strcm
 
 \"([^\\\n]|(\\.))*?\"      { insertConstant(lastIdentifier,yytext,"String Constant"); if(!insideInitializerList) lastIdentifier[0]='\0'; }
 \'([^\\\n]|(\\.))*?\'      { insertConstant(lastIdentifier,yytext,"Char Constant");   if(!insideInitializerList) lastIdentifier[0]='\0'; }
-{DIGIT}+"."{DIGIT}+        { insertConstant(lastIdentifier,yytext,"Float Constant");  if(!insideInitializerList) lastIdentifier[0]='\0'; }
-{DIGIT}+                   { insertConstant(lastIdentifier,yytext,"Integer Constant");if(!insideInitializerList) lastIdentifier[0]='\0'; }
+-?{DIGIT}+"."{DIGIT}+        { insertConstant(lastIdentifier,yytext,"Float Constant");  if(!insideInitializerList) lastIdentifier[0]='\0'; }
+-?{DIGIT}+                   { insertConstant(lastIdentifier,yytext,"Integer Constant");if(!insideInitializerList) lastIdentifier[0]='\0'; }
 
 "{"                        { if(lastIdentifier[0] != '\0') insideInitializerList = 1; }
 "}"                        { insideInitializerList = 0; if(!insideInitializerList) lastIdentifier[0]='\0'; }
@@ -231,4 +231,3 @@ int main(){
     printConstantTable();
     return 0;
 }
-
